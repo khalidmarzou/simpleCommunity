@@ -4,12 +4,12 @@
         <?php
             $buttonsList = array(
                 "register" => <<<EOT
-                    <a href="/register.php" class="bg-rose-500 hover:text-indigo-500 hover:bg-white py-1 px-3 text-xl">
+                    <a href="/register" class="bg-rose-500 hover:text-indigo-500 hover:bg-white py-1 px-3 text-xl">
                         <li class="list-none">Register</li>
                     </a>
                 EOT,
                 "login" => <<<EOT
-                    <a href="/login.php" class="bg-indigo-500 hover:text-indigo-500 hover:bg-white py-1 px-3 text-xl">
+                    <a href="/login" class="bg-indigo-500 hover:text-indigo-500 hover:bg-white py-1 px-3 text-xl">
                         <li class="list-none">Login</li>
                     </a>
                 EOT,
@@ -19,7 +19,7 @@
                     </a>
                 EOT,
                 "logOut" => <<<EOT
-                    <a href="/logOut.php" class="hover:text-indigo-500 py-1 px-3 text-2xl">
+                    <a href="/logOut" class="hover:text-indigo-500 py-1 px-3 text-2xl">
                         <li class="list-none"><i class="fa-solid fa-arrow-right-from-bracket"></i></li>
                     </a>
                 EOT

@@ -19,6 +19,7 @@
         $email = $_SESSION['userInfo']['Email'];
         $id = $_SESSION['userInfo']['UserID'];
 
+        // count total likes that user have:
         $query = 'SELECT COUNT(*) AS numberLikes FROM Blogs INNER JOIN Likes ON Blogs.BlogID = Likes.BlogID WHERE Blogs.UserID = :id';
         $statement = $pdo -> prepare($query);
         $statement -> execute([
@@ -27,6 +28,7 @@
         $numberLikes = $statement -> fetch(PDO::FETCH_ASSOC);
         $numberLikes = $numberLikes['numberLikes'];
 
+        //count total comments that user have :
         $query = 'SELECT COUNT(*) AS numberComments FROM Blogs INNER JOIN Comments ON Blogs.BlogID = Comments.BlogID WHERE Blogs.UserID = :id';
         $statement = $pdo -> prepare($query);
         $statement -> execute([
@@ -35,6 +37,7 @@
         $numberComments = $statement -> fetch(PDO::FETCH_ASSOC);
         $numberComments = $numberComments['numberComments'];
 
+        //count total blog that user have :
         $query = 'SELECT COUNT(*) AS numberBlogs FROM Blogs WHERE Blogs.UserID = :id';
         $statement = $pdo -> prepare($query);
         $statement -> execute([
@@ -46,6 +49,6 @@
         require_once './views/dashboard.view.php';
         exit();
     }else{
-        header('Location: /index.php');
+        header('Location: /');
         exit();
     }

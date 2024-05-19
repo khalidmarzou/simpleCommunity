@@ -10,15 +10,15 @@
 <div class="mx-auto p-5 sm:p-10 md:p-16 w-[70%] h-full overflow-auto relative">
 
     <div class="border-b mb-5 flex justify-between text-sm sticky top-0 z-50 bg-gray-100 px-6 py-4">
-        <div class="flex items-center pb-2 pr-2 uppercase hover:text-gray-500">
+        <div class="flex items-center pb-2 pr-2 uppercase hover:text-gray-500 cursor-pointer">
             <i class="fa-solid fa-microchip"></i><pre> </pre>
             <a href="#" class="font-semibold inline-block"> Technology</a>
         </div>
-        <div class="flex items-center pb-2 pr-2 uppercase hover:text-gray-500">
+        <div class="flex items-center pb-2 pr-2 uppercase hover:text-gray-500 cursor-pointer">
             <i class="fa-solid fa-flask"></i></i> <pre> </pre>
             <a href="#" class="font-semibold inline-block"> Science</a>
         </div>
-        <div class="flex items-center pb-2 pr-2 uppercase hover:text-gray-500">
+        <div class="flex items-center pb-2 pr-2 uppercase hover:text-gray-500 cursor-pointer">
             <i class="fa-solid fa-medal"></i></i> <pre> </pre>
             <a href="#" class="font-semibold inline-block"> Sport</a>
         </div>

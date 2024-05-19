@@ -1,10 +1,19 @@
-<?php
+<?php 
+    $uri = parse_url($_SERVER["REQUEST_URI"])["path"];
 
-    session_start();
-    
-    if (isset($_SESSION['userInfo'])){
-        header('Location: /dashboard.php');
-        exit();
+    if ($uri === "/") {
+
+        require 'controllers/index.php';
+    }else if ($uri === "/register"){
+
+        require 'controllers/register.php';
+    }else if ($uri === "/login"){
+
+        require "controllers/login.php";
+    }else if ($uri === "/dashboard"){
+
+        require "controllers/dashboard.php";
     }else{
-        require_once "views/index.view.php";
+
+        require "controllers/logOut.php";
     }

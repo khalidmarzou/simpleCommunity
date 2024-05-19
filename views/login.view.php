@@ -8,7 +8,7 @@
             <div class="hidden lg:block lg:w-1/2 bg-cover"
                 style="background-image:url('https://images.unsplash.com/photo-1546514714-df0ccc50d7bf?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=667&q=80')">
             </div>
-            <form class="w-full p-8 lg:w-1/2 flex flex-col justify-center items-center" action="/login.php" method="POST">
+            <form class="w-full p-8 lg:w-1/2 flex flex-col justify-center items-center" action="/login" method="POST">
                 <h2 class="text-2xl font-semibold text-gray-700 text-center">Hi !!</h2>
                 <p class="text-xl text-gray-600 text-center w-full">Welcome back!</p>
                 <a href="#" class="flex items-center justify-center mt-4 text-white rounded-lg shadow-md hover:bg-gray-100">
@@ -52,7 +52,7 @@
                 </div>
                 <div class="mt-4 flex items-center justify-between w-full">
                     <span class="border-b w-1/5 md:w-1/4"></span>
-                    <a href="/register.php" class="text-xs text-gray-500 uppercase">or sign up</a>
+                    <a href="/register" class="text-xs text-gray-500 uppercase">or sign up</a>
                     <span class="border-b w-1/5 md:w-1/4"></span>
                 </div>
             </form>

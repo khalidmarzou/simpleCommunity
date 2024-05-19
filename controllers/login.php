@@ -22,7 +22,7 @@
             // get data user and store it in session;
                 session_start();
                 $_SESSION['userInfo'] = $user;
-                require_once "dashboard.php";
+                header("Location: /dashboard");
                 exit();
         }else{
             $infoIncorrect = "Email or password Incorrect.";

@@ -15,7 +15,7 @@
                     <!-- Col -->
                     <div class="w-full lg:w-7/12 bg-white p-5 rounded-lg lg:rounded-l-none flex flex-col items-center justify-center">
                         <h3 class="py-4 text-2xl text-center text-gray-800">Create an Account!</h3>
-                        <form class="px-8 pt-6 pb-8 mb-4 bg-white rounded" action="/register.php" method="POST">
+                        <form class="px-8 pt-6 pb-8 mb-4 bg-white rounded" action="/register" method="POST">
                             <div class="mb-4 md:flex md:justify-between">
                                 <div class="mb-4 md:mr-2 md:mb-0">
                                     <label class="block mb-2 text-sm font-bold text-gray-700" for="firstName">
@@ -97,7 +97,7 @@
                             </div>
                             <div class="text-center">
                                 <a class="inline-block text-sm text-blue-500 align-baseline hover:text-blue-800"
-                                    href="/login.php">
+                                    href="/login">
                                     Already have an account? Login!
                                 </a>
                             </div>

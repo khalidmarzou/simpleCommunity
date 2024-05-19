@@ -42,14 +42,14 @@
                 $user = $statement -> fetch(PDO::FETCH_ASSOC);
 
                 $_SESSION['userInfo'] = $user;
-                require_once "dashboard.php";
+                header("Location: /dashboard");
                 exit();
 
             } catch (PDOException $e) {
                 die('Error in Insertion data in data base' . $e->getMessage());
             }
         }else{
-            $emailExist = 'Email already Exist data base.';
+            $emailExist = 'Email already Exist try to Login.';
             $buttonsHeader = 1;
             require_once "views/register.view.php";
             exit();
