@@ -32,7 +32,7 @@
                 </a>
                 <div class="mt-4 flex items-center justify-between w-full">
                     <span class="border-b w-1/5 lg:w-1/4"></span>
-                    <a href="#" class="text-xs text-center text-gray-500 uppercase w-full">or login with email</a>
+                    <a href="" class="text-xs text-center text-gray-500 uppercase w-full">or login with email</a>
                     <span class="border-b w-1/5 lg:w-1/4"></span>
                 </div>
                 <div class="mt-4 w-full">
@@ -43,7 +43,7 @@
                 <div class="mt-4 w-full">
                     <div class="flex justify-between">
                         <label class="block text-gray-700 text-sm font-bold mb-2">Password</label>
-                        <a href="#" class="text-xs text-gray-500">Forget Password?</a>
+                        <a href="/forgetPassword" class="text-xs text-gray-500">Forget Password?</a>
                     </div>
                     <input class="bg-gray-200 text-gray-700 focus:outline-none focus:shadow-outline border rounded py-2 px-4 block w-full appearance-none" type="password" id="password" name="password"/>
                 </div>
@@ -59,6 +59,6 @@
         </div>
     </div>
 </main>
-<script src="./javaScript/login.js"></script>
+<script src="/js/login.js"></script>
 
 <?php require_once "partials/footer.php" ?>

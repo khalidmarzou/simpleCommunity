@@ -1,2 +1,0 @@
-# simpleCommunity
-PHP JS HTML5 TAILWINDCSS

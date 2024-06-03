@@ -1,38 +1,62 @@
 <?php
-
+    session_start();
+    
+    if(isset($_SESSION["userInfo"])){
+        header("Location: /dashboard");
+    }
+    
     if($_SERVER["REQUEST_METHOD"] == "POST"){
         $email = $_POST["email"];
         $password = $_POST["password"];
 
-        require_once "./dataBase/connection.php";
+        require_once dirname(__DIR__) . "/database/connection.php";
 
         try {
             // check if data is correct :
-                $query = "SELECT * FROM Users WHERE Email = :email AND Password = :password";
-                $statement = $pdo -> prepare($query);
-                $statement -> execute([
-                    ':email' => $email,
-                    ':password' => $password,
-                ]);
-                $user = $statement -> fetch(PDO::FETCH_ASSOC);
+                $db = new Database();
+                $db -> query("SELECT * FROM Users WHERE Email = :email");
+                $db -> bind(':email' , $email);
+                $user = $db -> single();
+
+                if ($user){
+
+                    $passwordValid = password_verify($password, $user -> Password);
+
+                    if($passwordValid){
+
+                        // get data user and store it in session;
+                            if(property_exists($user,'Password')){
+                                unset($user -> Password);
+                            }
+
+                            
+                            $_SESSION['userInfo'] = $user;
+                            header("Location: /dashboard");
+                            exit();
+
+                    } else {
+
+                        $infoIncorrect = "Email or password Incorrect.";
+                        $buttonsHeader = 1;
+                        require_once dirname(__DIR__) . "/views/login.view.php";
+                        exit();
+
+                    }
+                } else {
+
+                        $infoIncorrect = "Email or password Incorrect.";
+                        $buttonsHeader = 1;
+                        require_once dirname(__DIR__) . "/views/login.view.php";
+                        exit();
+
+                }
         } catch (PDOException $e){
+
                 die('Error in Check Email User in data Base' . $e->getMessage());
-        }
-        if($user){
-            // get data user and store it in session;
-                session_start();
-                $_SESSION['userInfo'] = $user;
-                header("Location: /dashboard");
-                exit();
-        }else{
-            $infoIncorrect = "Email or password Incorrect.";
-            $buttonsHeader = 1;
-            require_once "views/login.view.php";
-            exit();
+
         }
     }
 
 
     $infoIncorrect = '';
-    $buttonsHeader = 2;
-    require_once "views/login.view.php";
+    require_once dirname(__DIR__) . "/views/login.view.php";

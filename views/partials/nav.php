@@ -18,25 +18,33 @@
                         <li class="list-none"><i class="fa-solid fa-house"></i></li>
                     </a>
                 EOT,
-                "logOut" => <<<EOT
-                    <a href="/logOut" class="hover:text-indigo-500 py-1 px-3 text-2xl">
+                "logout" => <<<EOT
+                    <a href="/logout" class="hover:text-indigo-500 py-1 px-3 text-2xl">
                         <li class="list-none"><i class="fa-solid fa-arrow-right-from-bracket"></i></li>
                     </a>
-                EOT
+                EOT,
+                "dashboard" => <<<EOT
+                    <a href="/dashboard" class="hover:text-indigo-500 py-1 px-3 text-2xl">
+                        <li class="list-none"><i class="fa-solid fa-table-columns"></i></li>
+                    </a>
+                EOT,
             );
+            
+            if ($uri== '/' || $uri == '/forgetPassword'){
 
-            if (!isset($buttonsHeader)) {
-                $buttonsHeader = 0; // Default to 0 if not set
-            }
-
-            if ($buttonsHeader == 0){
                 echo $buttonsList["register"] . $buttonsList["login"] . $buttonsList["home"];
-            } elseif ($buttonsHeader == 1){
+            } elseif ($uri == '/register'){
+
                 echo $buttonsList["login"] . $buttonsList["home"];
-            } elseif ($buttonsHeader == 2){
+            } elseif ($uri == '/login'){
+
                 echo $buttonsList["register"] . $buttonsList["home"];
+            } else if ($uri == '/newBlog' || $uri == '/blog') {
+
+                echo $buttonsList["dashboard"] . $buttonsList["home"] . $buttonsList["logout"];
             } else {
-                echo $buttonsList["home"] . $buttonsList["logOut"];
+
+                echo $buttonsList["home"] . $buttonsList["logout"];
             }
         ?>
     </ul>

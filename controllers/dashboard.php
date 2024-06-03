@@ -1,54 +1,53 @@
 <?php
 
     session_start();
+    require_once dirname(__DIR__) . "/database/connection.php";
+    $db = new Database();
 
-    if(isset($_SESSION['userInfo'])){
-        try {
-            require_once 'dataBase/connection.php';
-            $query = "SELECT * FROM Blogs";
-            $statement = $pdo -> prepare($query);
-            $statement -> execute();
-            $blogs = $statement -> fetchAll(PDO::FETCH_ASSOC);
-        } catch (PDOException $e) {
-            die("Failed to Get Blogs : " . $e->getMessage());
-        }
-        // users Infos :
-
-        $firstName = $_SESSION['userInfo']['FirstName'];
-        $lastName = $_SESSION['userInfo']['LastName'];
-        $email = $_SESSION['userInfo']['Email'];
-        $id = $_SESSION['userInfo']['UserID'];
-
-        // count total likes that user have:
-        $query = 'SELECT COUNT(*) AS numberLikes FROM Blogs INNER JOIN Likes ON Blogs.BlogID = Likes.BlogID WHERE Blogs.UserID = :id';
-        $statement = $pdo -> prepare($query);
-        $statement -> execute([
-            ':id'=> $id,
-        ]);
-        $numberLikes = $statement -> fetch(PDO::FETCH_ASSOC);
-        $numberLikes = $numberLikes['numberLikes'];
-
-        //count total comments that user have :
-        $query = 'SELECT COUNT(*) AS numberComments FROM Blogs INNER JOIN Comments ON Blogs.BlogID = Comments.BlogID WHERE Blogs.UserID = :id';
-        $statement = $pdo -> prepare($query);
-        $statement -> execute([
-            ':id'=> $id,
-        ]);
-        $numberComments = $statement -> fetch(PDO::FETCH_ASSOC);
-        $numberComments = $numberComments['numberComments'];
-
-        //count total blog that user have :
-        $query = 'SELECT COUNT(*) AS numberBlogs FROM Blogs WHERE Blogs.UserID = :id';
-        $statement = $pdo -> prepare($query);
-        $statement -> execute([
-            ':id'=> $id,
-        ]);
-        $numberBlogs = $statement -> fetch(PDO::FETCH_ASSOC);
-        $numberBlogs = $numberBlogs['numberBlogs'];
-
-        require_once './views/dashboard.view.php';
+    if(!isset($_SESSION["userInfo"])){
+        header("Location: /");
         exit();
-    }else{
-        header('Location: /');
-        exit();
+    } else {
+        $name = $_SESSION["userInfo"] -> FirstName . ' ' . $_SESSION["userInfo"] -> LastName;
+        $email = $_SESSION["userInfo"] -> Email;
+        $picture = $_SESSION["userInfo"] -> Profile;
+        $UserID = $_SESSION["userInfo"] -> UserID;
+
+        $db -> query("SELECT * FROM Likes WHERE BlogID IN (SELECT BlogID FROM Blogs WHERE UserID = :id)");
+        $db -> bind(":id" , $UserID);
+        $db -> execute();
+        $likesNB = $db -> rowCount();
+
+
+        $db -> query("SELECT * FROM Blogs WHERE UserID = :id");
+        $db -> bind(":id", $UserID);
+        $db -> execute();
+        $blogsNB = $db -> rowCount();
+
+        $db -> query("SELECT * FROM Blogs");
+        $db -> execute();
+        $allNB = $db -> rowCount();
+
+        $db -> query("SELECT * FROM Blogs WHERE Category = 'Technology'");
+        $db -> execute();
+        $techNB = $db -> rowCount();
+
+        $db -> query("SELECT * FROM Blogs WHERE Category = 'Sport'");
+        $db -> execute();
+        $sportNB = $db -> rowCount();
+
+        $db -> query("SELECT * FROM Blogs WHERE Category = 'Science'");
+        $db -> execute();
+        $scienceNB = $db -> rowCount();
+
+        $db -> query("SELECT * FROM Blogs NATURAL JOIN Users");
+        $db -> execute();
+        $allBlogs = array_reverse($db -> resultSet());
+
+        $db -> query("SELECT * FROM Followers WHERE UserID = :UserID");
+        $db -> bind(":UserID", $UserID);
+        $db -> execute();
+        $followersNB = $db -> rowCount();
+        
+        require_once dirname(__DIR__) . "/views/dashboard.view.php";
     }

@@ -1,19 +1,36 @@
-<?php 
+<?php
+    
     $uri = parse_url($_SERVER["REQUEST_URI"])["path"];
 
-    if ($uri === "/") {
+    $routes = [
 
-        require 'controllers/index.php';
-    }else if ($uri === "/register"){
+        "/" => "controllers/index.php",
 
-        require 'controllers/register.php';
-    }else if ($uri === "/login"){
+        "/dashboard" => "controllers/dashboard.php",
 
-        require "controllers/login.php";
-    }else if ($uri === "/dashboard"){
+        "/logout" => "controllers/logout.php",
 
-        require "controllers/dashboard.php";
-    }else{
+        "/register" => "controllers/register.php",
 
-        require "controllers/logOut.php";
+        "/login" => "controllers/login.php",
+
+        "/forgetPassword" => "controllers/forgetPassword.php",
+
+        "/terms" => "terms_conditions/terms.html",
+
+        "/newBlog" => "controllers/newBlog.php",
+
+        "/blog" => "controllers/blog.php",
+        
+    ];
+
+    if(array_key_exists($uri, $routes)) {
+
+        require $routes[$uri];
+
+    } else {
+
+        require "views/page404.php";
+
+        die();
     }
