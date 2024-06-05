@@ -18,7 +18,11 @@
                             <p class="text-gray-700"><?= $User -> Email ?></p>
                             <div class="mt-6 flex flex-wrap gap-4 justify-center">
                                 <a href="#" onclick="follow(event ,<?= $User -> UserID ?>)" class="<?= $followerORnot ? 'bg-red-500 hover:bg-red-600' : 'bg-blue-500 hover:bg-blue-600' ?>  text-white py-2 px-4 rounded"><?= $followerORnot ? 'Following' : 'Follow'  ?></a>
-                                <a href="#" class="bg-gray-300 hover:bg-gray-400 text-gray-700 py-2 px-4 rounded">Message</a>
+                                <?php if ($profileUserID == $UserID) :?>
+                                    <a href="/editProfile" class="bg-gray-300 hover:bg-gray-400 text-gray-700 py-2 px-4 rounded">Edit</a>
+                                <?php else : ?>
+                                    <a href="#" class="bg-gray-300 hover:bg-gray-400 text-gray-700 py-2 px-4 rounded">Message</a>
+                                <?php endif; ?>
                             </div>
                         </div>
                         <hr class="my-6 border-t border-gray-300">
@@ -66,6 +70,7 @@
                                 <a href="#" class="cursor-pointer hover:underline"><li class="mb-2"><pre>Followers : <span id="countFollowers"><?= $countFollowers ?></span></pre></li></a>
                             </ul>
                         </div>
+                        <p class="font-light mt-10">Registration Date : <?= $User -> RegistrationDate ?></p>
                     </div>
                 </div>
                 <div class="col-span-4 sm:col-span-9 h-full overflow-y-auto">

@@ -57,10 +57,10 @@ function getComments() {
                   <article class="p-6 text-base bg-white border-t border-gray-200 w-[80%]">
                     <footer class="flex justify-between items-center mb-2">
                         <div class="flex items-center">
-                            <p class="inline-flex items-center mr-3 text-sm text-gray-900 font-semibold"><img
+                            <a href="/profile?UserID=${cmmt.UserID}" class="inline-flex items-center mr-3 text-sm text-gray-900 font-semibold hover:underline"><img
                                     class="mr-2 w-6 h-6 rounded-full"
                                     src="${cmmt.Profile}"
-                                    alt="${cmmt.LastName}">${cmmt.LastName} ${cmmt.FirstName}</p>
+                                    alt="${cmmt.LastName}">${cmmt.LastName} ${cmmt.FirstName}</a>
                             <p class="text-sm text-gray-600"><span>${cmmt.CommentDate}</span></p>
                         </div>
                         ${btnSpr}

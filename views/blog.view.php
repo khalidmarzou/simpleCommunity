@@ -13,7 +13,7 @@
         </div>
         <div class="flex justify-between items-center mb-5">
             <div class="flex items-center gap-5">
-                <a class="flex items-center space-x-4 hover:underline" href="#">
+                <a class="flex items-center space-x-4 hover:underline" href="/profile?UserID=<?= $blog -> UserID ?>">
                     <img class="w-7 h-7 rounded-full" src="<?= $blog -> Profile ?>" alt="<?= $blog -> LastName ?>" />
                     <span class="font-medium">
                         <?= $blog -> LastName . ' ' . $blog -> FirstName ?>

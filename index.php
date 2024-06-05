@@ -23,6 +23,8 @@
         "/blog" => "controllers/blog.php",
 
         "/profile" => "controllers/profile.php",
+
+        "/editProfile" => "controllers/editProfile.php",
         
     ];
 
