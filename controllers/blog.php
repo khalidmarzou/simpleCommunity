@@ -1,6 +1,12 @@
 <?php
 
     session_start();
+    if (empty($_SESSION["userInfo"])) {
+        header("Location: /");
+        exit();
+    }
+
+
     require_once dirname(__DIR__) . "/database/connection.php";
     $db = new Database();
 

@@ -124,7 +124,7 @@
 
                     ?>
                     <article id="<?= $blog -> BlogID ?>" class="p-6 bg-white rounded-lg border border-gray-200 shadow-md">
-                        <input type="hidden" <?= $followerORnot ? 'name="network"' : '' ?>>
+                        <input type="hidden" <?= $followerORnot ? 'network' : '' ?>>
                         <div class="flex justify-between items-center mb-5 text-gray-500">
                             <span id="category" class="bg-primary-100 text-primary-800 text-xs font-medium inline-flex items-center gap-2 px-2.5 py-0.5 rounded">
                                 <i class="fa-brands fa-readme"></i>

@@ -9,8 +9,8 @@ const filterBtns = Array.from(
   id("filterBtns").querySelectorAll('div[role="button"]')
 );
 
-const networkBlogs = Array.from(
-  blogsContainer.querySelectorAll('input[name="network"]')
+let networkBlogs = Array.from(
+  blogsContainer.querySelectorAll("input[network]")
 ).map((input) => input.parentElement);
 
 id("networkBlogs").textContent = "+" + networkBlogs.length;
@@ -198,7 +198,8 @@ function dislike(event) {
 }
 
 function follow(event) {
-  const blog = event.target.parentElement.parentElement.parentElement.parentElement;
+  const blog =
+    event.target.parentElement.parentElement.parentElement.parentElement;
   const BlogID = blog.id;
   const isFollowing = event.target.classList.contains("fa-regular");
 
@@ -224,17 +225,31 @@ function follow(event) {
     })
     .then((data) => {
       if (data["status"] == 1) {
-        if (isFollowing) {
-          event.target.classList.remove("fa-regular");
-          event.target.classList.add("fa-solid");
-        } else {
-          event.target.classList.remove("fa-solid");
-          event.target.classList.add("fa-regular");
-        }
-        id('followersNB').textContent = data['followersNB'];
+        id("followersNB").textContent = data["followersNB"];
       } else {
         alert("There is an error with the Follow button");
         console.error("Server error response:", data);
+      }
+      if (data["followTargetBlogs"].length != 0) {
+        data["followTargetBlogs"].forEach((bgID) => {
+          const targetBlog = blogs.find((bg) => bg.id == bgID.BlogID);
+          targetBlog.children[0].toggleAttribute("network");
+          const targetBlogStar = targetBlog.querySelector(
+            'a[onclick="follow(event)"]'
+          ).firstElementChild;
+
+          if (targetBlogStar.classList.contains("fa-regular")) {
+            targetBlogStar.classList.remove("fa-regular");
+            targetBlogStar.classList.add("fa-solid");
+          } else {
+            targetBlogStar.classList.remove("fa-solid");
+            targetBlogStar.classList.add("fa-regular");
+          }
+        });
+        networkBlogs = Array.from(
+          blogsContainer.querySelectorAll("input[network]")
+        ).map((input) => input.parentElement);
+        id("networkBlogs").textContent = "+" + networkBlogs.length;
       }
     })
     .catch((error) => {

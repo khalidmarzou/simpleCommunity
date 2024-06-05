@@ -7,7 +7,8 @@
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $response = array(
             "status" => 404,
-            "followersNB" => 404
+            "followersNB" => 404,
+            "followTargetBlogs" => [],
         );
 
         $rawData = file_get_contents('php://input');
@@ -32,7 +33,15 @@
                 $db -> bind(':UserID', $followTarget);
                 $db -> execute();
 
+                $db -> query("SELECT BlogID FROM Blogs NATURAL JOIN Followers WHERE UserID = :UserID;");
+                $db -> bind(":UserID", $followTarget);
+                $db -> execute();
+                $followTargetBlogs = $db -> resultSet();
+    
+                $response["followTargetBlogs"] = $followTargetBlogs;
+
                 $response["status"] = 1;
+
             
             } catch (Exception $e) {
 
@@ -42,6 +51,13 @@
 
         } else {
             try {
+
+                $db -> query("SELECT BlogID FROM Blogs NATURAL JOIN Followers WHERE UserID = :UserID;");
+                $db -> bind(":UserID", $followTarget);
+                $db -> execute();
+                $followTargetBlogs = $db -> resultSet();
+    
+                $response["followTargetBlogs"] = $followTargetBlogs;
 
                 $db -> query('DELETE FROM Followers WHERE FollowerID = :FollowerID AND UserID = :UserID');
                 $db -> bind(':FollowerID', $UserID);
