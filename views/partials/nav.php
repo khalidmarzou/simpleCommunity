@@ -39,7 +39,7 @@
             } elseif ($uri == '/login'){
 
                 echo $buttonsList["register"] . $buttonsList["home"];
-            } else if ($uri == '/newBlog' || $uri == '/blog') {
+            } else if ($uri == '/newBlog' || $uri == '/blog' || $uri == '/profile') {
 
                 echo $buttonsList["dashboard"] . $buttonsList["home"] . $buttonsList["logout"];
             } else {

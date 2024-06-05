@@ -138,7 +138,7 @@
                         </p>
                         <div class="flex justify-between items-center">
                             <div class="flex items-center gap-5">
-                                <a class="flex items-center space-x-4 hover:underline" href="#">
+                                <a class="flex items-center space-x-4 hover:underline" href="/profile?UserID=<?= $blog -> UserID ?>">
                                     <img class="w-7 h-7 rounded-full" src="<?= $blog -> Profile ?>" alt="<?= $blog -> LastName ?>" />
                                     <span class="font-medium">
                                         <?= $blog -> LastName . ' ' . $blog -> FirstName ?>
@@ -177,7 +177,7 @@
                     <img class="object-cover object-center h-32" src='<?= $picture ?>' >
                 </div>
                 <div class="text-center mt-2">
-                    <h2 class="font-semibold"><?= $name ?></h2>
+                    <a href="/profile" class="hover:cursor-pointer hover:underline"><h2 class="font-semibold"><?= $name ?></h2></a>
                     <p class="text-gray-500"><?= $email ?></p>
                 </div>
                 <ul class="py-4 mt-2 text-gray-700 flex items-center justify-around">

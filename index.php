@@ -21,6 +21,8 @@
         "/newBlog" => "controllers/newBlog.php",
 
         "/blog" => "controllers/blog.php",
+
+        "/profile" => "controllers/profile.php",
         
     ];
 
