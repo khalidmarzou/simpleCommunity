@@ -1,8 +1,14 @@
 <?php
     session_start();
+
+    if (!isset($_SESSION["userInfo"])){
+        header("Location: /");
+        exit();
+    }
     require_once dirname(__DIR__) . "/database/connection.php";
     $db = new Database();
-    $UserID = $_SESSION['userInfo'] -> UserID;
+    $user = $_SESSION["userInfo"];
+    $UserID = $user -> UserID;
 
     if($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['UserID'])) {
         $profileUserID = $_GET['UserID'];

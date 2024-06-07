@@ -33,8 +33,9 @@
                 $db -> bind(':UserID', $followTarget);
                 $db -> execute();
 
-                $db -> query("SELECT BlogID FROM Blogs NATURAL JOIN Followers WHERE UserID = :UserID;");
+                $db -> query("SELECT BlogID FROM Blogs NATURAL JOIN Followers WHERE FollowerID = :FollowerID AND UserID = :UserID;");
                 $db -> bind(":UserID", $followTarget);
+                $db -> bind(":FollowerID", $UserID);
                 $db -> execute();
                 $followTargetBlogs = $db -> resultSet();
     
@@ -52,8 +53,9 @@
         } else {
             try {
 
-                $db -> query("SELECT BlogID FROM Blogs NATURAL JOIN Followers WHERE UserID = :UserID;");
+                $db -> query("SELECT BlogID FROM Blogs NATURAL JOIN Followers WHERE FollowerID = :FollowerID AND UserID = :UserID;");
                 $db -> bind(":UserID", $followTarget);
+                $db -> bind(":FollowerID", $UserID);
                 $db -> execute();
                 $followTargetBlogs = $db -> resultSet();
     
@@ -72,6 +74,8 @@
         }
 
         try {
+            
+
             $db -> query("SELECT * FROM Followers WHERE UserID = :UserID");
             $db -> bind(":UserID", $UserID);
             $db -> execute();

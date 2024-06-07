@@ -17,10 +17,10 @@
                             <h1 class="text-xl font-bold"><?= "{$User -> FirstName} {$User -> LastName}" ?></h1>
                             <p class="text-gray-700"><?= $User -> Email ?></p>
                             <div class="mt-6 flex flex-wrap gap-4 justify-center">
-                                <a href="#" onclick="follow(event ,<?= $User -> UserID ?>)" class="<?= $followerORnot ? 'bg-red-500 hover:bg-red-600' : 'bg-blue-500 hover:bg-blue-600' ?>  text-white py-2 px-4 rounded"><?= $followerORnot ? 'Following' : 'Follow'  ?></a>
                                 <?php if ($profileUserID == $UserID) :?>
-                                    <a href="/editProfile" class="bg-gray-300 hover:bg-gray-400 text-gray-700 py-2 px-4 rounded">Edit</a>
+                                    <a href="/editProfile" class="bg-gray-300 hover:bg-gray-400 text-gray-700 py-2 px-10 rounded">Edit</a>
                                 <?php else : ?>
+                                    <a href="#" onclick="follow(event ,<?= $User -> UserID ?>)" class="<?= $followerORnot ? 'bg-red-500 hover:bg-red-600' : 'bg-blue-500 hover:bg-blue-600' ?>  text-white py-2 px-4 rounded"><?= $followerORnot ? 'Following' : 'Follow'  ?></a>
                                     <a href="#" class="bg-gray-300 hover:bg-gray-400 text-gray-700 py-2 px-4 rounded">Message</a>
                                 <?php endif; ?>
                             </div>
@@ -97,13 +97,13 @@
 
                                     $db -> query('SELECT * FROM Likes WHERE UserID = :UserID AND BlogID = :BlogID');
                                     $db -> bind(':BlogID', $blog -> BlogID);
-                                    $db -> bind(':UserID', $profileUserID);
+                                    $db -> bind(':UserID', $user -> UserID);
                                     $db -> execute();
                                     $likeit =  $db -> rowCount();
 
                                     $db -> query('SELECT * FROM Dislikes WHERE UserID = :UserID AND BlogID = :BlogID');
                                     $db -> bind(':BlogID', $blog -> BlogID);
-                                    $db -> bind(':UserID', $profileUserID);
+                                    $db -> bind(':UserID', $user -> UserID);
                                     $db -> execute();
                                     $dislikeit =  $db -> rowCount() > 0;
                                 ?>
@@ -127,9 +127,12 @@
                                                 <a href="#" onclick="dislike(event)"><i class="fa-<?=$dislikeit == 0? 'regular' : 'solid' ?> fa-thumbs-down hover:text-red-500"></i></a>
                                             </span>
                                             <span class="flex justfiy-center items-center gap-2">
-                                                <a href="/blog?BlogID=<?= $blog -> BlogID ?>"><i class="fa-regular fa-comment hover:text-green-500"></i></a>
+                                                | <a href="/blog?BlogID=<?= $blog -> BlogID ?>"><i class="fa-regular fa-comment hover:text-green-500"></i></a>
                                                 <span class="font-bold"><?= $commentsNB ?></span>
                                             </span>
+                                            <?php if ($profileUserID == $UserID) :?>
+                                                | <a href="#" onclick="deleteBlog(<?= $blog -> BlogID ?>)"><i class="fa-solid fa-trash hover:text-gray-700"></i></a>
+                                            <?php endif ; ?>
                                         </div>
                                         <a href="/blog?BlogID=<?= $blog -> BlogID ?>" class="inline-flex items-center font-medium text-primary-600 hover:underline">
                                             Read more
@@ -148,6 +151,7 @@
     </div>
 </main>
 <script src="/js/profile.js" ></script>
+<script src="/js/deleteBlog.js"></script>
 
 <?php
     require_once dirname(__DIR__) . '/views/partials/footer.php';

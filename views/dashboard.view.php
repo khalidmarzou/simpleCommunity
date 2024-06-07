@@ -153,9 +153,10 @@
                                     <a href="#" onclick="dislike(event)"><i class="fa-<?=$dislikeit == 0? 'regular' : 'solid' ?> fa-thumbs-down hover:text-red-500"></i></a>
                                 </span>
                                 <span class="flex justfiy-center items-center gap-2">
-                                    <a href="/blog?BlogID=<?= $blog -> BlogID ?>"><i class="fa-regular fa-comment hover:text-green-500"></i></a>
+                                    | <a href="/blog?BlogID=<?= $blog -> BlogID ?>"><i class="fa-regular fa-comment hover:text-green-500"></i></a>
                                     <span class="font-bold"><?= $commentsNB ?></span>
                                 </span>
+                                
                             </div>
                             <a href="/blog?BlogID=<?= $blog -> BlogID ?>" class="inline-flex items-center font-medium text-primary-600 hover:underline">
                                 Read more

@@ -8,10 +8,21 @@
         header("Location: /");
         exit();
     } else {
+        $UserID = $_SESSION["userInfo"] -> UserID;
+
+        $db -> query("SELECT * FROM Users WHERE UserID = :UserID;");
+        $db -> bind(":UserID", $UserID);
+        $db -> execute();
+        $User = $db -> single();
+        if (property_exists($User,"Password")) {
+            unset($User -> Password);
+        };
+
+        $_SESSION["userInfo"] = $User;
+
         $name = $_SESSION["userInfo"] -> FirstName . ' ' . $_SESSION["userInfo"] -> LastName;
         $email = $_SESSION["userInfo"] -> Email;
         $picture = $_SESSION["userInfo"] -> Profile;
-        $UserID = $_SESSION["userInfo"] -> UserID;
 
         $db -> query("SELECT * FROM Likes WHERE BlogID IN (SELECT BlogID FROM Blogs WHERE UserID = :id)");
         $db -> bind(":id" , $UserID);
