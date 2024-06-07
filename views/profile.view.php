@@ -74,7 +74,7 @@
                     </div>
                 </div>
                 <div class="col-span-4 sm:col-span-9 h-full overflow-y-auto">
-                    <div class="bg-white shadow rounded-lg p-6 h-full overflow-y-auto flex flex-col gap-4">
+                    <div id="blogsContainer" class="bg-white shadow rounded-lg p-6 h-full overflow-y-auto flex flex-col gap-4">
                         <?php if(count($Blogs) > 0) :?>
                             <?php foreach($Blogs as $blog) : ?>
                                 <?php
@@ -131,7 +131,7 @@
                                                 <span class="font-bold"><?= $commentsNB ?></span>
                                             </span>
                                             <?php if ($profileUserID == $UserID) :?>
-                                                | <a href="#" onclick="deleteBlog(<?= $blog -> BlogID ?>)"><i class="fa-solid fa-trash hover:text-gray-700"></i></a>
+                                                | <a href="#" onclick="deleteBlog(event, <?= $blog -> BlogID ?>)"><i class="fa-solid fa-trash hover:text-gray-700"></i></a>
                                             <?php endif ; ?>
                                         </div>
                                         <a href="/blog?BlogID=<?= $blog -> BlogID ?>" class="inline-flex items-center font-medium text-primary-600 hover:underline">

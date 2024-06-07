@@ -1,26 +1,32 @@
 <?php
-    require_once dirname(__DIR__) . "/database/connection.php";
-    $db =  new Database();
 
-    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-        $rowData = file_get_contents('php://input');
-        $data = json_decode($rowData, true);
+require_once dirname(__DIR__) . "/database/connection.php";
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $response = [
+        'status' => false,
+    ];
+
+    $rowData = file_get_contents('php://input');
+    $data = json_decode($rowData, true);
+
+    if (isset($data['CommentID'])) {
         $CommentID = $data['CommentID'];
-        $response = array(
-            'status'=> false,
-        );
+
         try {
+            $db = new Database();
             $query = 'DELETE FROM Comments WHERE CommentID = :CommentID';
-            $db -> query($query);
-            $db -> bind(':CommentID', $CommentID);
-            $db -> execute();
+            $db->query($query);
+            $db->bind(':CommentID', $CommentID);
+            $db->execute();
             $response['status'] = true;
-
         } catch (Exception $e) {
-
-            echo $e->getMessage();
+            error_log($e->getMessage());
         }
-
-        $response = json_encode($response);
-        echo $response;
+    } else {
+        http_response_code(400);
+        $response['error'] = 'CommentID not provided';
     }
+
+    echo json_encode($response);
+}

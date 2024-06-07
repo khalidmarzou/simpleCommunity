@@ -29,7 +29,7 @@
     }
 
     try {
-        $query = 'SELECT * FROM Blogs WHERE UserID = :UserID;';
+        $query = 'SELECT * FROM Blogs WHERE UserID = :UserID ORDER BY LastModifiedDate DESC;';
         $db -> query($query);
         $db -> bind(':UserID', $profileUserID);
         $db -> execute();

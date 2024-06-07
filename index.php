@@ -36,5 +36,4 @@
 
         require "views/page404.php";
 
-        die();
     }
