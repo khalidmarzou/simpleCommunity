@@ -33,18 +33,23 @@
             if ($uri== '/' || $uri == '/forgetPassword'){
 
                 echo $buttonsList["register"] . $buttonsList["login"] . $buttonsList["home"];
+
             } elseif ($uri == '/register'){
 
                 echo $buttonsList["login"] . $buttonsList["home"];
+
             } elseif ($uri == '/login'){
 
                 echo $buttonsList["register"] . $buttonsList["home"];
+
             } else if ($uri == '/newBlog' || $uri == '/blog' || $uri == '/profile' || $uri == '/editProfile') {
 
                 echo $buttonsList["dashboard"] . $buttonsList["home"] . $buttonsList["logout"];
+
             } else {
 
                 echo $buttonsList["home"] . $buttonsList["logout"];
+                
             }
         ?>
     </ul>

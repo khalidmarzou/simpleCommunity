@@ -20,7 +20,7 @@
 
         if ($action == 1) {
             try {
-
+                $db -> beginTransaction();
                 $db -> query('INSERT INTO Likes (UserID, BlogID) VALUES (:UserID, :BlogID)');
                 $db -> bind(':UserID', $UserID);
                 $db -> bind(':BlogID', $BlogID);
@@ -30,11 +30,11 @@
                 $db -> bind(':UserID', $UserID);
                 $db -> bind(':BlogID', $BlogID);
                 $db -> execute();
-
+                $db -> commitTransaction();
                 $response["status"] = 1;
             
             } catch (Exception $e) {
-
+                $db -> cancelTransaction();
                 $response["status"] = 0;
             }
             
@@ -53,7 +53,8 @@
                 $response["status"] = 0;
             }
         }
-        try {
+        try {   
+                $db -> beginTransaction();
                 $db -> query('SELECT * FROM Likes WHERE BlogID = :BlogID');
                 $db -> bind(':BlogID', $BlogID);
                 $db -> execute();
@@ -69,11 +70,13 @@
                 $db -> execute();
                 $likeNB = $db -> rowCount();
 
+                $db -> commitTransaction();
                 $reactionNB = $likesBlogNB - $dislikesNB;
                 $response["reactionNB"] = $reactionNB;
                 $response["likeNB"] = $likeNB;
             
         } catch (Exception $e) {
+                $db -> cancelTransaction();
                 $response["reactionNB"] = 404;
         }
 

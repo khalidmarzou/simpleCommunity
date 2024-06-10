@@ -70,7 +70,7 @@ class Database {
         return $this->pdo->beginTransaction();
     }
 
-    public function endTransaction() {
+    public function commitTransaction() {
         return $this->pdo->commit();
     }
 
